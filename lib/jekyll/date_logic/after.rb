@@ -4,35 +4,32 @@ module Jekyll
   module DateLogic
     class After < Liquid::Block
 
-      include Jekyll::DateLogic::Clock
-
       def initialize(tag_name, args, tokens)
         super
         @args = args.split
       end
 
       def render(context)
-        @parser = Jekyll::DateLogic::Parser.new(content, @args, 'after')
-        super if time_missing || time_qualifies
+        parser = Jekyll::DateLogic::Parser.new('after', context, @args)
+        time = parser.time? ? parser.time : nil
+        for_hours = parser.for_hours? ? parser.for_hours : nil
+        super if show_content?(time, for_hours)
       end
 
-      def time_qualifies
-        time = @parser.time
-        if for_hours_missing
-          past?(time)
+      def self.show_content?(time = nil, for_hours = nil)
+        time.nil? || time_qualifies(time, for_hours)
+      end
+
+      def self.time_qualifies(time, for_hours = nil)
+        if for_hours.nil?
+          Clock.past?(time)
         else
-          hours = @parser.for_hours
-          seconds = hours * 60 * 60
-          past?(time) && future?(time + seconds)
+          Clock.past?(time) && Clock.future?(time + seconds(for_hours))
         end
       end
 
-      def time_missing
-        !@parser.time?
-      end
-
-      def for_hours_missing
-        !@parser.for_hours?
+      def self.seconds(for_hours)
+        for_hours * 60 * 60
       end
 
     end

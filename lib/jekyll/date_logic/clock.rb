@@ -4,16 +4,16 @@ module Jekyll
   module DateLogic
     module Clock
 
-      def now
+      def self.now
         Time.now
       end
 
-      def past?(date_time)
-        now > date_time
+      def self.past?(time)
+        now > time
       end
 
-      def future?(date_time)
-        now < date_time
+      def self.future?(time)
+        now < time
       end
 
     end

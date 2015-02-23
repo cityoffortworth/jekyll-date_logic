@@ -4,25 +4,19 @@ module Jekyll
   module DateLogic
     class Before < Liquid::Block
 
-      include Jekyll::DateLogic::Clock
-
       def initialize(tag_name, args, tokens)
         super
         @args = args.split
       end
 
       def render(context)
-        @parser = Jekyll::DateLogic::Parser.new(content, @args, 'before')
-        super if time_missing || time_qualifies
+        parser = Jekyll::DateLogic::Parser.new('before', context, @args)
+        time = parser.time? ? parser.time : nil
+        super if show_content?(time)
       end
 
-      def time_qualifies
-        time = @parser.time
-        future?(time)
-      end
-
-      def time_missing
-        !@parser.time?
+      def self.show_content?(time = nil)
+        time.nil? || Clock.future?(time)
       end
 
     end
