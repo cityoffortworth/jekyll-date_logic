@@ -1,6 +1,10 @@
+require 'jekyll/date_logic'
+
 module Jekyll
   module DateLogic
     class Before < Liquid::Block
+
+      include Jekyll::DateLogic::Clock
 
       def initialize(tag_name, args, tokens)
         super
@@ -8,12 +12,17 @@ module Jekyll
       end
 
       def render(context)
-        if DateLogic.no_date?(context, @args, 'before')
-          super
-        else
-          time = DateLogic.parse_date_time(context, @args[0], 'before')
-          super if Time.now < time
-        end
+        @parser = Jekyll::DateLogic::Parser.new(content, @args, 'before')
+        super if time_missing || time_qualifies
+      end
+
+      def time_qualifies
+        time = @parser.time
+        future?(time)
+      end
+
+      def time_missing
+        !@parser.time?
       end
 
     end

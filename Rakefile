@@ -1,9 +1,10 @@
 require 'bundler/gem_tasks'
+require 'rake/testtask'
 
-desc 'Run tests'
-task :test do
-  test_file = File.join('test', 'jekyll', 'date_logic_test.rb')
-  system "ruby -Ilib #{test_file}"
+Rake::TestTask.new do |test|
+  test.libs << 'lib' << 'test'
+  test.pattern = 'test/**/*_test.rb'
+  test.verbose = true
 end
 
 task :default => :test
