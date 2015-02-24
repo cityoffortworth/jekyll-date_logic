@@ -5,7 +5,7 @@ require 'jekyll/date_logic/version'
 
 Gem::Specification.new do |spec|
 
-  spec.name          = 'jekyll-date-logic'
+  spec.name          = 'jekyll-date_logic'
   spec.version       = Jekyll::DateLogic::VERSION
   spec.authors       = ['Greg Scott']
   spec.email         = ['me@gregoryjscott.com']
