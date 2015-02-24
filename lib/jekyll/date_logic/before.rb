@@ -10,13 +10,22 @@ module Jekyll
       end
 
       def render(context)
-        parser = Jekyll::DateLogic::Parser.new('before', context, @args)
+        parser = Parser.new('before', context, @args)
         time = parser.time? ? parser.time : nil
-        super if show_content?(time)
+        for_hours = parser.for_hours? ? parser.for_hours : nil
+        super if show_content?(time, for_hours)
       end
 
-      def self.show_content?(time = nil)
-        time.nil? || Clock.future?(time)
+      def self.show_content?(time = nil, for_hours = nil)
+        time.nil? || time_qualifies(time, for_hours)
+      end
+
+      def self.time_qualifies(time, for_hours = nil)
+        if for_hours.nil?
+          Clock.future?(time)
+        else
+          Clock.future?(time) && Clock.past?(time - Convert.seconds(for_hours))
+        end
       end
 
     end

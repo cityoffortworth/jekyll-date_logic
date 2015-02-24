@@ -54,9 +54,9 @@ describe Jekyll::DateLogic do
         assert before.show_content?(five_hours_from_now)
       end
 
-      # it 'if time - for_hours is in the past' do
-      #   assert before.show_content?(five_hours_from_now, 6)
-      # end
+      it 'if time - for_hours is in the past' do
+        assert before.show_content?(five_hours_from_now, 6)
+      end
     end
 
     describe 'does not show content' do
@@ -68,9 +68,9 @@ describe Jekyll::DateLogic do
         refute before.show_content?(five_hours_ago)
       end
 
-      # it 'if time - for_hours is in the future' do
-      #   refute before.show_content?(five_hours_from_now, 4)
-      # end
+      it 'if time - for_hours is in the future' do
+        refute before.show_content?(five_hours_from_now, 4)
+      end
     end
   end
 

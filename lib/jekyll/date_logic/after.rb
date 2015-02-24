@@ -10,7 +10,7 @@ module Jekyll
       end
 
       def render(context)
-        parser = Jekyll::DateLogic::Parser.new('after', context, @args)
+        parser = Parser.new('after', context, @args)
         time = parser.time? ? parser.time : nil
         for_hours = parser.for_hours? ? parser.for_hours : nil
         super if show_content?(time, for_hours)
@@ -24,12 +24,8 @@ module Jekyll
         if for_hours.nil?
           Clock.past?(time)
         else
-          Clock.past?(time) && Clock.future?(time + seconds(for_hours))
+          Clock.past?(time) && Clock.future?(time + Convert.seconds(for_hours))
         end
-      end
-
-      def self.seconds(for_hours)
-        for_hours * 60 * 60
       end
 
     end
