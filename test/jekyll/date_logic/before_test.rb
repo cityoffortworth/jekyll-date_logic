@@ -38,5 +38,4 @@ describe Jekyll::DateLogic::Before do
       refute before.show_content?(five_hours_from_now, 4)
     end
   end
-
 end

@@ -39,5 +39,4 @@ describe Jekyll::DateLogic::After do
       refute after.show_content?(five_hours_ago, 4)
     end
   end
-
 end
