@@ -1,15 +1,35 @@
 ---
-last_year: 2014-01-23 00:00:00 -0600
-next_year: 2016-01-23 00:00:00 -0600
+last_decade: 2005-01-23 00:00:00 -0600
+next_decade: 2025-01-23 00:00:00 -0600
 ---
-{% after page.last_year %}
+{% after page.last_decade %}
+success
 {% endafter %}
 
-{% before page.next_year %}
+{% after page.next_decade %}
+failure
+{% endafter %}
+
+{% before page.next_decade %}
+success
 {% endbefore %}
 
-{% after page.last_year for_hours=48 %}
+{% before page.last_decade %}
+failure
+{% endbefore %}
+
+{% after page.last_decade for_hours=48 %}
+failure
 {% endafter %}
 
-{% before page.next_year for_hours=48 %}
+{% after page.last_decade for_hours=175200 %}
+success
+{% endafter %}
+
+{% before page.next_decade for_hours=48 %}
+failure
+{% endbefore %}
+
+{% before page.next_decade for_hours=175200 %}
+success
 {% endbefore %}

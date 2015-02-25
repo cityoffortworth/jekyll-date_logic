@@ -14,5 +14,12 @@ describe Jekyll::DateLogic do
 
   it 'successfully builds' do
     site.process
+
+    filename = File.join('_site', 'test.html')
+    contents = File.read(filename)
+
+    assert contents.scan(/(?=success)/).count == 4, "Expected 4 success outputs"
+    assert contents.scan(/(?=failure)/).count == 0, "Expected 0 failure outputs"
   end
+
 end
