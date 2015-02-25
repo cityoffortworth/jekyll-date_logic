@@ -2,7 +2,7 @@ require 'jekyll/date_logic'
 
 module Jekyll
   module DateLogic
-    module Parsable
+    module Parser
 
       def initialize(tag_name, args, tokens)
         super
@@ -16,10 +16,6 @@ module Jekyll
         time = time? ? parse_time : nil
         for_hours = for_hours? ? parse_for_hours : nil
         super if show_content?(time, for_hours)
-      end
-
-      def show_content?(time = nil, for_hours = nil)
-        true
       end
 
       def time?

@@ -10,7 +10,7 @@ describe Jekyll::DateLogic::After do
 
   before(:each) { Jekyll::DateLogic::Clock.stubs(:now).returns(now) }
 
-  let(:after) { Jekyll::DateLogic::After }
+  let(:after) { Object.new.extend(Jekyll::DateLogic::After) }
 
   describe 'shows content' do
     it 'if time variable not found' do

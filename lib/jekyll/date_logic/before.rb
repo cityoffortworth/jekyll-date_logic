@@ -2,11 +2,9 @@ require 'jekyll/date_logic'
 
 module Jekyll
   module DateLogic
-    class Before < Liquid::Block
+    module Before
 
-      include Parsable
-
-      def self.show_content?(time = nil, for_hours = nil)
+      def show_content?(time = nil, for_hours = nil)
         if time.nil?
           true
         elsif for_hours.nil?
@@ -19,5 +17,3 @@ module Jekyll
     end
   end
 end
-
-Liquid::Template.register_tag('before', Jekyll::DateLogic::Before)

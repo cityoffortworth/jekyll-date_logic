@@ -9,7 +9,7 @@ describe Jekyll::DateLogic::Before do
   let(:five_hours_from_now) { now + five_hours }
   before(:each) { Jekyll::DateLogic::Clock.stubs(:now).returns(now) }
 
-  let(:before) { Jekyll::DateLogic::Before }
+  let(:before) { Object.new.extend(Jekyll::DateLogic::Before) }
 
   describe 'shows content' do
     it 'if time is not found' do
