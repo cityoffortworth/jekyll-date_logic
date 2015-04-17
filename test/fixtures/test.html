@@ -45,3 +45,5 @@ after filter worked
 {{ future["the_date"] }}
 before filter worked
 {% endfor %}
+
+{% assign features = site.data.features | before:"end_date" %}

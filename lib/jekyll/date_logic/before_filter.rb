@@ -7,7 +7,7 @@ module Jekyll
       def before(input, date)
         future_dates = input.select do |item|
           time = parse_time(item, date)
-          Clock.future?(time)
+          time.nil? || Clock.future?(time)
         end
       end
 
@@ -18,7 +18,7 @@ module Jekyll
           time = Time.parse(item[date])
         rescue
           puts "Unable to parse #{date} as time in 'before' filter."
-          raise
+          nil
         end
       end
     end

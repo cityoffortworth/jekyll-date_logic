@@ -7,7 +7,7 @@ module Jekyll
       def after(input, date)
         past_dates = input.select do |item|
           time = parse_time(item, date)
-          Clock.past?(time)
+          time.nil? || Clock.past?(time)
         end
       end
 
@@ -18,7 +18,7 @@ module Jekyll
           time = Time.parse(item[date])
         rescue
           puts "Unable to parse #{date} as time in 'after' filter."
-          raise
+          nil
         end
       end
     end
