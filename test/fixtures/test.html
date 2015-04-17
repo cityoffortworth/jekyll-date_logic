@@ -33,3 +33,17 @@ failure
 {% before page.next_decade for_hours=175200 %}
 success
 {% endbefore %}
+
+{% assign past_dates = site.data.test | after:"the_date" %}
+{% for past in past_dates %}
+{{ past["the_date"] }}
+after filter worked
+{% endfor %}
+
+{% assign future_dates = site.data.test | before:"the_date" %}
+{% for future in future_dates %}
+{{ future["the_date"] }}
+before filter worked
+{% endfor %}
+
+{% assign features = site.data.features | before:"end_date" %}
