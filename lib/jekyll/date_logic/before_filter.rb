@@ -4,13 +4,11 @@ module Jekyll
   module DateLogic
     module BeforeFilter
 
-      include FilterParser
-
       def before(input, date, for_hours = nil)
         future_dates = input.select do |item|
           next true if item[date].nil?
-          time = parse_time(item[date])
-          for_hours_number = parse_for_hours(for_hours) unless for_hours.nil?
+          time = Time.parse(item[date])
+          for_hours_number = Parser.parse_for_hours(for_hours) unless for_hours.nil?
           Before.qualifies?(time, for_hours_number)
         end
       end

@@ -12,39 +12,17 @@ module Jekyll
 
       def render(context)
         @context = context
-        validate_time
-        time = time? ? parse_time : nil
-        for_hours = for_hours? ? parse_for_hours : nil
+        time = !@context[@args[0]].nil? ? Time.parse(@context[@args[0]].to_s) : nil
+        for_hours = !@args[1].nil? ? Parser.parse_for_hours(@args[1]) : nil
         super if qualifies?(time, for_hours)
       end
 
-      def time?
-        !@context[@args[0]].nil?
-      end
-
-      def validate_time
-        puts "'#{@tag_name}' block has missing or invalid #{@args[0]} time." unless time?
-      end
-
-      def parse_time
+      def self.parse_for_hours(value)
         begin
-          time = Time.parse(@context[@args[0]].to_s)
-        rescue
-          puts "Unable to parse #{@args[0]} as time in '#{@tag_name}' block."
-          raise
-        end
-      end
-
-      def for_hours?
-        !@args[1].nil?
-      end
-
-      def parse_for_hours
-        begin
-          if @args[1] =~ /for_hours=([0-9]*)/ then
+          if value =~ /for_hours=([0-9]*)/ then
             Integer($1)
           else
-            raise "Unable to parse '#{@args[1]}' as 'for_hours=NUMBER' in #{@tag_name} block."
+            raise "Unable to parse '#{value}' as 'for_hours=NUMBER' in block."
           end
         end
       end
