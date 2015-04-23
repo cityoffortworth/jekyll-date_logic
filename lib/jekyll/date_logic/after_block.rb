@@ -5,7 +5,10 @@ module Jekyll
     class AfterBlock < Liquid::Block
 
       include Parser
-      include After
+
+      def qualifies?(time = nil, for_hours = nil)
+        After.qualifies?(time, for_hours)
+      end
 
     end
   end

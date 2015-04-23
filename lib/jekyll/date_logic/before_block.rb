@@ -5,7 +5,10 @@ module Jekyll
     class BeforeBlock < Liquid::Block
 
       include Parser
-      include Before
+
+      def qualifies?(time = nil, for_hours = nil)
+        Before.qualifies?(time, for_hours)
+      end
 
     end
   end

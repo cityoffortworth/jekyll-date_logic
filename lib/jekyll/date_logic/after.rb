@@ -4,7 +4,7 @@ module Jekyll
   module DateLogic
     module After
 
-      def qualifies?(time = nil, for_hours = nil)
+      def self.qualifies?(time = nil, for_hours = nil)
         if time.nil?
           true
         elsif for_hours.nil?

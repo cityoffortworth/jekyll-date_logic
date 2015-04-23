@@ -9,7 +9,7 @@ module Jekyll
       def after(input, date)
         past_dates = input.select do |item|
           time = parse_time(item, date)
-          time.nil? || Clock.past?(time)
+          After.qualifies?(time)
         end
       end
 
