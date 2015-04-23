@@ -4,10 +4,15 @@ module Jekyll
   module DateLogic
     class BeforeBlock < Liquid::Block
 
-      include Parser
+      def initialize(tag_name, args, tokens)
+        super
+        @args = args.split
+      end
 
-      def qualifies?(time = nil, for_hours = nil)
-        Before.qualifies?(time, for_hours)
+      def render(context)
+        time = !context[@args[0]].nil? ? Time.parse(context[@args[0]].to_s) : nil
+        for_hours = !@args[1].nil? ? Parser.parse_for_hours(@args[1]) : nil
+        super if Before.qualifies?(time, for_hours)
       end
 
     end
