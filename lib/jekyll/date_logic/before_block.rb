@@ -11,7 +11,7 @@ module Jekyll
 
       def render(context)
         time = !context[@args[0]].nil? ? Time.parse(context[@args[0]].to_s) : nil
-        for_hours = !@args[1].nil? ? Parser.parse_for_hours(@args[1]) : nil
+        for_hours = !@args[1].nil? ? ForHours.parse(@args[1]) : nil
         super if Before.qualifies?(time, for_hours)
       end
 
