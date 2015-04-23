@@ -4,6 +4,8 @@ module Jekyll
   module DateLogic
     module AfterFilter
 
+      include FilterParser
+
       def after(input, date)
         past_dates = input.select do |item|
           time = parse_time(item, date)
@@ -11,16 +13,6 @@ module Jekyll
         end
       end
 
-      private
-
-      def parse_time(item, date)
-        begin
-          time = Time.parse(item[date])
-        rescue
-          puts "Unable to parse #{date} as time in 'after' filter."
-          nil
-        end
-      end
     end
   end
 end
