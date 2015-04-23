@@ -4,8 +4,16 @@ module Jekyll
   module DateLogic
     class AfterBlock < Liquid::Block
 
-      include Parser
-      include After
+      def initialize(tag_name, args, tokens)
+        super
+        @args = args.split
+      end
+
+      def render(context)
+        time = !context[@args[0]].nil? ? Time.parse(context[@args[0]].to_s) : nil
+        for_hours = !@args[1].nil? ? ForHours.parse(@args[1]) : nil
+        super if After.qualifies?(time, for_hours)
+      end
 
     end
   end

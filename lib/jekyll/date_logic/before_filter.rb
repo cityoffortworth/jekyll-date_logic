@@ -4,23 +4,15 @@ module Jekyll
   module DateLogic
     module BeforeFilter
 
-      def before(input, date)
+      def before(input, date, for_hours = nil)
         future_dates = input.select do |item|
-          time = parse_time(item, date)
-          time.nil? || Clock.future?(time)
-        end
-      end
-
-      private
-
-      def parse_time(item, date)
-        begin
+          next true if item[date].nil?
           time = Time.parse(item[date])
-        rescue
-          puts "Unable to parse #{date} as time in 'before' filter."
-          nil
+          for_hours_number = ForHours.parse(for_hours) unless for_hours.nil?
+          Before.qualifies?(time, for_hours_number)
         end
       end
+
     end
   end
 end

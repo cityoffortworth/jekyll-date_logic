@@ -4,23 +4,15 @@ module Jekyll
   module DateLogic
     module AfterFilter
 
-      def after(input, date)
+      def after(input, date, for_hours = nil)
         past_dates = input.select do |item|
-          time = parse_time(item, date)
-          time.nil? || Clock.past?(time)
-        end
-      end
-
-      private
-
-      def parse_time(item, date)
-        begin
+          next true if item[date].nil?
           time = Time.parse(item[date])
-        rescue
-          puts "Unable to parse #{date} as time in 'after' filter."
-          nil
+          for_hours_number = ForHours.parse(for_hours) unless for_hours.nil?
+          After.qualifies?(time, for_hours_number)
         end
       end
+
     end
   end
 end
