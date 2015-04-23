@@ -6,10 +6,12 @@ module Jekyll
 
       include FilterParser
 
-      def after(input, date)
+      def after(input, date, for_hours = nil)
         past_dates = input.select do |item|
-          time = parse_time(item, date)
-          After.qualifies?(time)
+          next true if item[date].nil?
+          time = parse_time(item[date])
+          for_hours_number = parse_for_hours(for_hours) unless for_hours.nil?
+          After.qualifies?(time, for_hours_number)
         end
       end
 

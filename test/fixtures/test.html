@@ -3,35 +3,35 @@ last_decade: 2005-01-23 00:00:00 -0600
 next_decade: 2025-01-23 00:00:00 -0600
 ---
 {% after page.last_decade %}
-success
+block success
 {% endafter %}
 
 {% after page.next_decade %}
-failure
+block failure
 {% endafter %}
 
 {% before page.next_decade %}
-success
+block success
 {% endbefore %}
 
 {% before page.last_decade %}
-failure
+block failure
 {% endbefore %}
 
 {% after page.last_decade for_hours=48 %}
-failure
+block failure
 {% endafter %}
 
 {% after page.last_decade for_hours=175200 %}
-success
+block success
 {% endafter %}
 
 {% before page.next_decade for_hours=48 %}
-failure
+block failure
 {% endbefore %}
 
 {% before page.next_decade for_hours=175200 %}
-success
+block success
 {% endbefore %}
 
 {% assign past_dates = site.data.test | after:"the_date" %}
@@ -44,6 +44,30 @@ after filter worked
 {% for future in future_dates %}
 {{ future["the_date"] }}
 before filter worked
+{% endfor %}
+
+{% assign past_dates = site.data.test | after:"the_date", "for_hours=48" %}
+{% for past in past_dates %}
+{{ past["the_date"] }}
+after for_hours filter failure
+{% endfor %}
+
+{% assign past_dates = site.data.test | after:"the_date", "for_hours=175200" %}
+{% for past in past_dates %}
+{{ past["the_date"] }}
+after for_hours filter success
+{% endfor %}
+
+{% assign future_dates = site.data.test | before:"the_date", "for_hours=48" %}
+{% for future in future_dates %}
+{{ future["the_date"] }}
+before for_hours filter failure
+{% endfor %}
+
+{% assign future_dates = site.data.test | before:"the_date", "for_hours=175200" %}
+{% for future in future_dates %}
+{{ future["the_date"] }}
+before for_hours filter success
 {% endfor %}
 
 {% assign features = site.data.features | before:"end_date" %}

@@ -26,11 +26,11 @@ module Jekyll
       #   puts "'#{@tag_name}' block has missing or invalid #{@args[0]} time." unless time?
       # end
 
-      def parse_time(item, date)
+      def parse_time(time_value)
         begin
-          time = Time.parse(item[date])
+          time = Time.parse(time_value)
         rescue
-          nil
+          raise
         end
       end
 
@@ -47,15 +47,15 @@ module Jekyll
       #   !@args[1].nil?
       # end
       #
-      # def parse_for_hours
-      #   begin
-      #     if @args[1] =~ /for_hours=([0-9]*)/ then
-      #       Integer($1)
-      #     else
-      #       raise "Unable to parse '#{@args[1]}' as 'for_hours=NUMBER' in #{@tag_name} block."
-      #     end
-      #   end
-      # end
+      def parse_for_hours(value)
+        begin
+          if value =~ /for_hours=([0-9]*)/ then
+            Integer($1)
+          else
+            raise "Unable to parse '#{value}' as 'for_hours=NUMBER' in filter."
+          end
+        end
+      end
     end
   end
 end
