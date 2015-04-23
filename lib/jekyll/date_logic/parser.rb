@@ -15,7 +15,7 @@ module Jekyll
         validate_time
         time = time? ? parse_time : nil
         for_hours = for_hours? ? parse_for_hours : nil
-        super if show_content?(time, for_hours)
+        super if qualifies?(time, for_hours)
       end
 
       def time?

@@ -4,7 +4,7 @@ module Jekyll
   module DateLogic
     module After
 
-      def show_content?(time = nil, for_hours = nil)
+      def qualifies?(time = nil, for_hours = nil)
         if time.nil?
           true
         elsif for_hours.nil?

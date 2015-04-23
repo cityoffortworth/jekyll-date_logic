@@ -13,29 +13,29 @@ describe Jekyll::DateLogic::Before do
 
   describe 'shows content' do
     it 'if time is not found' do
-      assert before.show_content?(nil)
+      assert before.qualifies?(nil)
     end
 
     it 'if time is in the future' do
-      assert before.show_content?(five_hours_from_now)
+      assert before.qualifies?(five_hours_from_now)
     end
 
     it 'if time - for_hours is in the past' do
-      assert before.show_content?(five_hours_from_now, 6)
+      assert before.qualifies?(five_hours_from_now, 6)
     end
   end
 
   describe 'does not show content' do
     it 'if time is now' do
-      refute before.show_content?(now)
+      refute before.qualifies?(now)
     end
 
     it 'if time is in the past' do
-      refute before.show_content?(five_hours_ago)
+      refute before.qualifies?(five_hours_ago)
     end
 
     it 'if time - for_hours is in the future' do
-      refute before.show_content?(five_hours_from_now, 4)
+      refute before.qualifies?(five_hours_from_now, 4)
     end
   end
 end

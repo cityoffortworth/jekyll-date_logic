@@ -14,29 +14,29 @@ describe Jekyll::DateLogic::After do
 
   describe 'shows content' do
     it 'if time variable not found' do
-      assert after.show_content?(nil)
+      assert after.qualifies?(nil)
     end
 
     it 'if time passed is in the past' do
-      assert after.show_content?(five_hours_ago)
+      assert after.qualifies?(five_hours_ago)
     end
 
     it 'if time passed + for_hours is in the future' do
-      assert after.show_content?(five_hours_ago, 6)
+      assert after.qualifies?(five_hours_ago, 6)
     end
   end
 
   describe 'does not show content' do
     it 'if time is now' do
-      refute after.show_content?(now)
+      refute after.qualifies?(now)
     end
 
     it 'if time is in the future' do
-      refute after.show_content?(five_hours_from_now)
+      refute after.qualifies?(five_hours_from_now)
     end
 
     it 'if time + for_hours is in the past' do
-      refute after.show_content?(five_hours_ago, 4)
+      refute after.qualifies?(five_hours_ago, 4)
     end
   end
 end
