@@ -20,20 +20,32 @@ describe Jekyll::DateLogic do
       File.read(filename)
     end
 
-    it 'should output success messages' do
-      assert_equal 4, contents.scan(/(?=block success)/).count
+    it 'after block works' do
+      assert_equal 1, contents.scan(/(?=after block success)/).count
+      assert_equal 0, contents.scan(/(?=after block failure)/).count
     end
 
-    it 'should not output failure messages' do
-      assert_equal 0, contents.scan(/(?=block failure)/).count
+    it 'before block works' do
+      assert_equal 1, contents.scan(/(?=before block success)/).count
+      assert_equal 0, contents.scan(/(?=before block failure)/).count
     end
 
-    it 'should output before filter worked messages' do
-      assert_equal 3, contents.scan(/(?=before filter worked)/).count
+    it 'after for_hours block works' do
+      assert_equal 1, contents.scan(/(?=after for_hours block success)/).count
+      assert_equal 0, contents.scan(/(?=after for_hours block failure)/).count
     end
 
-    it 'should output after filter worked messages' do
-      assert_equal 2, contents.scan(/(?=after filter worked)/).count
+    it 'before for_hours block works' do
+      assert_equal 1, contents.scan(/(?=before for_hours block success)/).count
+      assert_equal 0, contents.scan(/(?=before for_hours block failure)/).count
+    end
+
+    it 'before filter works' do
+      assert_equal 3, contents.scan(/(?=before filter success)/).count
+    end
+
+    it 'after filter works' do
+      assert_equal 2, contents.scan(/(?=after filter success)/).count
     end
 
     it 'before for_hours filter works' do

@@ -3,47 +3,47 @@ last_decade: 2005-01-23 00:00:00 -0600
 next_decade: 2025-01-23 00:00:00 -0600
 ---
 {% after page.last_decade %}
-block success
+after block success
 {% endafter %}
 
 {% after page.next_decade %}
-block failure
+after block failure
 {% endafter %}
 
 {% before page.next_decade %}
-block success
+before block success
 {% endbefore %}
 
 {% before page.last_decade %}
-block failure
+before block failure
 {% endbefore %}
 
 {% after page.last_decade for_hours=48 %}
-block failure
+after for_hours block failure
 {% endafter %}
 
 {% after page.last_decade for_hours=175200 %}
-block success
+after for_hours block success
 {% endafter %}
 
 {% before page.next_decade for_hours=48 %}
-block failure
+before for_hours block failure
 {% endbefore %}
 
 {% before page.next_decade for_hours=175200 %}
-block success
+before for_hours block success
 {% endbefore %}
 
 {% assign past_dates = site.data.test | after:'the_date' %}
 {% for past in past_dates %}
 {{ past['the_date'] }}
-after filter worked
+after filter success
 {% endfor %}
 
 {% assign future_dates = site.data.test | before:'the_date' %}
 {% for future in future_dates %}
 {{ future['the_date'] }}
-before filter worked
+before filter success
 {% endfor %}
 
 {% assign past_dates = site.data.test | after:'the_date','for_hours=48' %}
