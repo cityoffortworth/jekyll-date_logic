@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Greg Scott']
   spec.email         = ['me@gregoryjscott.com']
   spec.summary       = %q{Custom jekyll blocks for applying date logic.}
-  spec.homepage      = 'https://github.com/gregoryjscott/jekyll-date-logic'
+  spec.homepage      = 'https://github.com/cityoffortworth/jekyll-date_logic'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
