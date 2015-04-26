@@ -7,7 +7,7 @@ module Jekyll
       def before(input, date, for_hours = nil)
         future_dates = input.select do |item|
           next true if item[date].nil?
-          time = Time.parse(item[date])
+          time = Time.parse(item[date].to_s)
           for_hours_number = ForHours.parse(for_hours) unless for_hours.nil?
           Before.qualifies?(time, for_hours_number)
         end

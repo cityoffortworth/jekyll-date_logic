@@ -71,3 +71,6 @@ before for_hours filter success
 {% endfor %}
 
 {% assign features = site.data.features | before:'end_date' %}
+
+{% assign after_posts = site.posts | after:'date' %}
+{% assign before_posts = site.posts | before:'date' %}
