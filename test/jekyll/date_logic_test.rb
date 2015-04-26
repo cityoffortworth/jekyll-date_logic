@@ -12,7 +12,7 @@ describe Jekyll::DateLogic do
 
   let(:site) { Jekyll::Site.new(config) }
 
-  describe 'check that' do
+  describe 'check in pages that' do
 
     let(:contents) do
       site.process
@@ -56,6 +56,34 @@ describe Jekyll::DateLogic do
     it 'after for_hours filter works' do
       assert_equal 2, contents.scan(/(?=after for_hours filter success)/).count
       assert_equal 0, contents.scan(/(?=after for_hours filter failure)/).count
+    end
+
+  end
+
+  describe 'check in posts that after block' do
+
+    let(:contents) do
+      site.process
+      filename = File.join('_site', 'blog', 'after.html')
+      File.read(filename)
+    end
+
+    it 'works' do
+      assert_equal 1, contents.scan(/(?=after block success)/).count
+    end
+
+  end
+
+  describe 'check in posts that before block' do
+
+    let(:contents) do
+      site.process
+      filename = File.join('_site', 'blog', 'before.html')
+      File.read(filename)
+    end
+
+    it 'works' do
+      assert_equal 1, contents.scan(/(?=before block success)/).count
     end
 
   end
