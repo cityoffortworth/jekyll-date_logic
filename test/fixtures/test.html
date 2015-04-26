@@ -1,6 +1,6 @@
 ---
-last_decade: 2005-01-23 00:00:00 -0600
-next_decade: 2025-01-23 00:00:00 -0600
+last_decade: 2005-01-01 00:00:00 -0600
+next_decade: 2025-01-01 00:00:00 -0600
 ---
 {% after page.last_decade %}
 after block success
@@ -71,3 +71,6 @@ before for_hours filter success
 {% endfor %}
 
 {% assign features = site.data.features | before:'end_date' %}
+
+{% assign after_posts = site.posts | after:'date' %}
+{% assign before_posts = site.posts | before:'date' %}
