@@ -5,6 +5,7 @@ module Jekyll
     module BeforeFilter
 
       def before(input, date, for_hours = nil)
+        return [] if input.nil?
         future_dates = input.select do |item|
           next true if item[date].nil?
           time = Time.parse(item[date].to_s)

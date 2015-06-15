@@ -20,4 +20,14 @@ describe Jekyll::DateLogic::BeforeFilter do
       assert_equal 0, data.length
     end
   end
+
+  it 'handle empty arrays' do
+    data = before_filter.before([], 'the_date')
+    assert_equal 0, data.length
+  end
+
+  it 'handle nil arrays' do
+    data = before_filter.before(nil, 'the_date')
+    assert_equal 0, data.length
+  end
 end
