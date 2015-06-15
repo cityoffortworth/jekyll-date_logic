@@ -5,6 +5,7 @@ module Jekyll
     module AfterFilter
 
       def after(input, date, for_hours = nil)
+        return [] if input.nil?
         past_dates = input.select do |item|
           next true if item[date].nil?
           time = Time.parse(item[date].to_s)

@@ -20,4 +20,14 @@ describe Jekyll::DateLogic::AfterFilter do
       assert_equal 0, data.length
     end
   end
+
+  it 'handle empty arrays' do
+    data = after_filter.after([], 'the_date')
+    assert_equal 0, data.length
+  end
+
+  it 'handle nil arrays' do
+    data = after_filter.after(nil, 'the_date')
+    assert_equal 0, data.length
+  end
 end
