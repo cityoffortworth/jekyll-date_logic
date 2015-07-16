@@ -74,3 +74,8 @@ before for_hours filter success
 
 {% assign after_posts = site.posts | after:'date' %}
 {% assign before_posts = site.posts | before:'date' %}
+
+{% assign after_docs = site.doc | after:'the_date' %}
+{{ after_docs | size }} after docs
+{% assign before_docs = site.doc | before:'the_date' %}
+{{ before_docs | size }} before docs
