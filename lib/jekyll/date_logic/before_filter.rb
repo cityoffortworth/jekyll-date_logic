@@ -17,6 +17,7 @@ module Jekyll
 
       private
 
+      # Copied from https://github.com/jekyll/jekyll/blob/92a9582733dfee0f359e491a8fae236e91087a54/lib/jekyll/filters.rb#L314-L322
       def item_property(item, property)
         if item.respond_to?(:to_liquid)
           item.to_liquid[property.to_s]
